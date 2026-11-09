@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact · The Irreverse</title>
+<meta name="description" content="The Irreverse: home to quantum physicist Yelena Guryanova and to all things irreversible.">
+<meta property="og:title" content="Contact · The Irreverse">
+<meta property="og:description" content="The Irreverse: home to quantum physicist Yelena Guryanova and to all things irreversible.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html">(IR)REVERSE</a>
+    <nav aria-label="Main">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu <span class="bars" aria-hidden="true"></span></button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-body">
+  <div class="wrap">
+    <!-- Replace this box with your contact details, e.g.
+         <p class="prose"><a href="mailto:you@example.com">you@example.com</a></p> -->
+    <div class="placeholder">Contact details coming soon. To fill this in, edit <code>contact.html</code> and replace this box with your email address and links.</div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 THE IRREVERSE · Yelena Guryanova</span>
+    <span class="mono">ΔS ≥ 0</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Menu panel on small screens
+    var bar = document.getElementById('bar');
+    var btn = bar.querySelector('.menu-btn');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = bar.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function () {
+      bar.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+
+    // Respect reduced-motion: stop the looping video and offer controls instead
+    var v = document.querySelector('.film video');
+    if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.removeAttribute('autoplay'); v.pause(); v.controls = true;
+    }
+
+    // Gallery: click an image to see it large
+    var box = null;
+    function close() { if (box) { box.remove(); box = null; document.body.style.overflow = ''; } }
+    document.querySelectorAll('[data-full]').forEach(function (img) {
+      img.addEventListener('click', function () {
+        box = document.createElement('div');
+        box.className = 'lightbox';
+        box.innerHTML = '<button type="button">Close</button><img alt="">';
+        box.querySelector('img').src = img.getAttribute('data-full');
+        box.querySelector('img').alt = img.alt;
+        box.addEventListener('click', close);
+        document.body.appendChild(box);
+        document.body.style.overflow = 'hidden';
+        box.querySelector('button').focus();
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); bar.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    });
+  })();
+</script>
+</body>
+</html>

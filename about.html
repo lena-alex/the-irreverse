@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About · The Irreverse</title>
+<meta name="description" content="The Irreverse: home to quantum physicist Yelena Guryanova and to all things irreversible.">
+<meta property="og:title" content="About · The Irreverse">
+<meta property="og:description" content="The Irreverse: home to quantum physicist Yelena Guryanova and to all things irreversible.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html">(IR)REVERSE</a>
+    <nav aria-label="Main">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu <span class="bars" aria-hidden="true"></span></button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-body">
+  <div class="wrap">
+    <div class="about">
+    <figure class="about-photo"><img src="assets/yelena-guryanova.jpg" width="1400" height="946" alt="Yelena Guryanova photographing her reflection in a shop window, black and white"></figure>
+    <div class="about-main">
+    <div class="prose about-text">
+      <p>Yelena Guryanova is a quantum physicist who specialises in quantum information. She completed her PhD in theoretical physics at the University of Bristol in 2016. After this she moved to Vienna, where she held a postdoc position at the Institute for Quantum Optics and Quantum Information (IQOQI) at the Austrian Academy of Sciences for two years. In 2019 she became co-group leader and coordinator of the Young Independent Research Group at IQOQI.</p>
+      <p>Her research interests include: quantum algorithms, quantum thermodynamics, causality and higher-order processes in quantum theory and beyond. She has been main applicant on more than EUR 4.5 million in funding and prizes and organised at least four international conferences.</p>
+      <p>She is community oriented and has worked in several interdisciplinary projects, ranging from those with multinational pharmaceutical companies and emerging startups to groups with artists and philosophers; she manages an organisation to promote equal opportunities and diversity in quantum science.</p>
+    </div>
+    <div class="affiliations affiliations--below">
+      <div class="aff">
+        <p class="aff-role">Lead Academic Research</p>
+        <p><strong>QuantumBasel Corp.</strong><br>Center of Competence for Quantum Computing &amp; AI<br>Schorenweg 44B<br>4144 Arlesheim · Switzerland<br><a href="https://www.quantumbasel.com">www.quantumbasel.com</a></p>
+      </div>
+      <div class="aff">
+        <p class="aff-role">Senior Research Associate</p>
+        <p><strong>University of Basel</strong><br>Center for Quantum Computing and Quantum Coherence (QC2)<br>Klingelbergstrasse 82<br>4056 Basel · Switzerland<br><a href="https://www.quantum.unibas.ch">www.quantum.unibas.ch</a></p>
+      </div>
+    </div>
+    <a class="dl cv" href="assets/Yelena-Guryanova_CV.pdf" target="_blank" rel="noopener">CV (PDF) <span aria-hidden="true">↗</span></a>
+    </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 THE IRREVERSE · Yelena Guryanova</span>
+    <span class="mono">ΔS ≥ 0</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Menu panel on small screens
+    var bar = document.getElementById('bar');
+    var btn = bar.querySelector('.menu-btn');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = bar.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function () {
+      bar.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+
+    // Respect reduced-motion: stop the looping video and offer controls instead
+    var v = document.querySelector('.film video');
+    if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.removeAttribute('autoplay'); v.pause(); v.controls = true;
+    }
+
+    // Gallery: click an image to see it large
+    var box = null;
+    function close() { if (box) { box.remove(); box = null; document.body.style.overflow = ''; } }
+    document.querySelectorAll('[data-full]').forEach(function (img) {
+      img.addEventListener('click', function () {
+        box = document.createElement('div');
+        box.className = 'lightbox';
+        box.innerHTML = '<button type="button">Close</button><img alt="">';
+        box.querySelector('img').src = img.getAttribute('data-full');
+        box.querySelector('img').alt = img.alt;
+        box.addEventListener('click', close);
+        document.body.appendChild(box);
+        document.body.style.overflow = 'hidden';
+        box.querySelector('button').focus();
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); bar.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    });
+  })();
+</script>
+</body>
+</html>
